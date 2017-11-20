@@ -14,6 +14,19 @@ class AlarmController {
     
     var alarms = [Alarm]()
     
+    // mock data
+    var mockAlarms: [Alarm] {
+        let alarm1 = Alarm(fireTimeFromMidnight: 1000, name: "Alarm #1")
+        let alarm2 = Alarm(fireTimeFromMidnight: 5000, name: "Alarm #2")
+        let alarm3 = Alarm(fireTimeFromMidnight: 10000, name: "Alarm #3")
+        
+        return [alarm1, alarm2, alarm3]
+    }
+    
+    init() {
+        alarms = mockAlarms
+    }
+    
     // add alarm
     func addAlarm(fireTimeFromMidnight: TimeInterval, name: String) -> Alarm {
         let newAlarm = Alarm(fireTimeFromMidnight: fireTimeFromMidnight, name: name)
