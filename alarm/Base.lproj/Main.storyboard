@@ -190,7 +190,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="nz5-1p-nIY">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="zTV-wW-yu2"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="zTV-wW-yu2">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="tRI-sK-gGh" id="gAv-HI-r2S"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="alarmDatePicker" destination="lgs-Gn-rx5" id="GBo-nf-buw"/>

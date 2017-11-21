@@ -46,6 +46,18 @@ class AlarmDetailTableViewController: UITableViewController {
     }
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {
+        
     }
     
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        let timeInterval = alarmDatePicker.date.timeIntervalSince(DateHelper.thisMorningAtMidnight!)
+        guard let title = alarmTitleTextField.text else { return }
+        if let alarm = alarm {
+            AlarmController.shared.update(alarm: alarm, fireTimeFromMidnight: timeInterval, name: title)
+        } else {
+            let _ = AlarmController.shared.addAlarm(fireTimeFromMidnight: timeInterval, name: title)
+        }
+        
+        navigationController?.popViewController(animated: true)
+    }
 }
