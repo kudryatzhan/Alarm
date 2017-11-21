@@ -33,6 +33,7 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewCellDe
         
         // Configure the cell...
         cell.alarm = alarm
+        cell.delegate = self
         
         return cell
     }
@@ -50,6 +51,16 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewCellDe
             let indexPath = tableView.indexPath(for: cell) else { return }
         AlarmController.shared.toggleEnabled(for: alarm)
         tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetailVC" {
+            if let destinationVC = segue.destination as? AlarmDetailTableViewController {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    destinationVC.alarm = AlarmController.shared.alarms[indexPath.row]
+                }
+            }
+        }
     }
     
     

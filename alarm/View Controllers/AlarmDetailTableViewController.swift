@@ -15,10 +15,34 @@ class AlarmDetailTableViewController: UITableViewController {
     @IBOutlet weak var alarmTitleTextField: UITextField!
     @IBOutlet weak var enableButton: UIButton!
     
+    var alarm: Alarm? {
+        didSet {
+            if isViewLoaded {
+                updateViews()
+            }
+        }
+    }
+    
+    
+    private func updateViews() {
+        guard let alarm = alarm else { enableButton.isHidden = true; return }
+        alarmDatePicker.date = alarm.fireDate!
+        alarmTitleTextField.text = alarm.name
+        
+        if alarm.enabled {
+            enableButton.setTitle("Disable", for: .normal)
+            enableButton.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        } else {
+            enableButton.setTitle("Enable", for: .normal)
+            enableButton.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateViews()
     }
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {

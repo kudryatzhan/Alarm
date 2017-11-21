@@ -9,6 +9,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Alarm List Table View Controller-->
         <scene sceneID="1yn-zp-ecF">
@@ -66,7 +71,7 @@
                                     <outlet property="alarmSwitch" destination="HXX-Ev-JG5" id="oN5-Jy-GjV"/>
                                     <outlet property="nameLabel" destination="W8v-Jj-mMD" id="4cw-aF-5zH"/>
                                     <outlet property="timeLabel" destination="QWh-5K-O5U" id="GSp-BE-Yc7"/>
-                                    <segue destination="tRI-sK-gGh" kind="show" id="0af-qS-nkk"/>
+                                    <segue destination="tRI-sK-gGh" kind="show" identifier="showDetailVC" id="0af-qS-nkk"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -159,7 +164,10 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsh-qS-rml">
                                                     <rect key="frame" x="16" y="11" width="343" height="22"/>
-                                                    <state key="normal" title="Enable/Disable"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="21"/>
+                                                    <state key="normal" title="Enable/Disable">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="enableButtonTapped:" destination="tRI-sK-gGh" eventType="touchUpInside" id="7gA-gE-ZNh"/>
                                                     </connections>
@@ -214,6 +222,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8EB-9t-znC"/>
+        <segue reference="0af-qS-nkk"/>
     </inferredMetricsTieBreakers>
 </document>
