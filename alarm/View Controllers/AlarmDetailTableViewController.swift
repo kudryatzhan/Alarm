@@ -18,7 +18,6 @@ class AlarmDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
     

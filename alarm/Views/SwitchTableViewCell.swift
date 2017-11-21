@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SwitchTableViewCellDelegate: class {
+    func switchCellSwitchValueChanged(cell: SwitchTableViewCell)
+}
+
 class SwitchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel: UILabel!
@@ -20,6 +24,8 @@ class SwitchTableViewCell: UITableViewCell {
         }
     }
     
+    weak var delegate: SwitchTableViewCellDelegate?
+    
     func updateViews() {
         guard let alarm = alarm else { return }
         timeLabel.text = alarm.fireTimeAsString
@@ -28,5 +34,6 @@ class SwitchTableViewCell: UITableViewCell {
     }
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
+        delegate?.switchCellSwitchValueChanged(cell: self)
     }
 }

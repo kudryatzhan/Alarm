@@ -46,4 +46,9 @@ class AlarmController {
         guard let indexOfAlarmToDelete = alarms.index(of: alarm) else { return }
         alarms.remove(at: indexOfAlarmToDelete)
     }
+    
+    // toggle enabled
+    func toggleEnabled(for alarm: Alarm) {
+        alarm.enabled = !alarm.enabled
+    }
 }
