@@ -49,6 +49,8 @@ class AlarmDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         updateViews()
+        enableButton.layer.cornerRadius = 14.0
+        enableButton.clipsToBounds = true
     }
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {

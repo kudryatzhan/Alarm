@@ -7,33 +7,33 @@
 //
 import Foundation
 
-class Alarm: NSObject, NSCoding {
+class Alarm: NSObject, Codable {
     
     // Keys for NSCoding
-    private let FireTimeFromMidnightKey = "fireTimeFromMidnight"
-    private let NameKey = "name"
-    private let EnabledKey = "enabled"
-    private let UUIDKey = "UUID"
+//    private let FireTimeFromMidnightKey = "fireTimeFromMidnight"
+//    private let NameKey = "name"
+//    private let EnabledKey = "enabled"
+//    private let UUIDKey = "UUID"
     
-    // MARK: - NSCoding
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        guard let name = aDecoder.decodeObject(forKey: NameKey) as? String,
-            let uuid = aDecoder.decodeObject(forKey: UUIDKey) as? String else { return nil }
-        
-        self.fireTimeFromMidnight = TimeInterval(aDecoder.decodeDouble(forKey: FireTimeFromMidnightKey))
-        self.name = name
-        self.enabled = aDecoder.decodeBool(forKey: EnabledKey)
-        self.uuid = uuid
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(fireTimeFromMidnight, forKey: FireTimeFromMidnightKey)
-        aCoder.encode(name, forKey: NameKey)
-        aCoder.encode(enabled, forKey: EnabledKey)
-        aCoder.encode(uuid, forKey: UUIDKey)
-    }
+//    // MARK: - NSCoding
+//
+//    required init?(coder aDecoder: NSCoder) {
+//
+//        guard let name = aDecoder.decodeObject(forKey: NameKey) as? String,
+//            let uuid = aDecoder.decodeObject(forKey: UUIDKey) as? String else { return nil }
+//
+//        self.fireTimeFromMidnight = TimeInterval(aDecoder.decodeDouble(forKey: FireTimeFromMidnightKey))
+//        self.name = name
+//        self.enabled = aDecoder.decodeBool(forKey: EnabledKey)
+//        self.uuid = uuid
+//    }
+//
+//    func encode(with aCoder: NSCoder) {
+//        aCoder.encode(fireTimeFromMidnight, forKey: FireTimeFromMidnightKey)
+//        aCoder.encode(name, forKey: NameKey)
+//        aCoder.encode(enabled, forKey: EnabledKey)
+//        aCoder.encode(uuid, forKey: UUIDKey)
+//    }
     
     // MARK: Properties
     

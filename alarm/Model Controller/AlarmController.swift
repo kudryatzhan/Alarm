@@ -24,13 +24,15 @@ class AlarmController {
     }
     
     init() {
-        alarms = mockAlarms
+        alarms = loadFromPersistenceStore()
     }
     
     // add alarm
     func addAlarm(fireTimeFromMidnight: TimeInterval, name: String) -> Alarm {
         let newAlarm = Alarm(fireTimeFromMidnight: fireTimeFromMidnight, name: name)
         alarms.append(newAlarm)
+        
+        saveToPersistenceStore()
         
         return newAlarm
     }
@@ -39,16 +41,54 @@ class AlarmController {
     func update(alarm: Alarm, fireTimeFromMidnight: TimeInterval, name: String) {
         alarm.fireTimeFromMidnight = fireTimeFromMidnight
         alarm.name = name
+        
+        saveToPersistenceStore()
     }
     
     // delete alarm
     func delete(alarm: Alarm) {
         guard let indexOfAlarmToDelete = alarms.index(of: alarm) else { return }
         alarms.remove(at: indexOfAlarmToDelete)
+        
+        saveToPersistenceStore()
     }
     
     // toggle enabled
     func toggleEnabled(for alarm: Alarm) {
         alarm.enabled = !alarm.enabled
+        
+        saveToPersistenceStore()
+    }
+    
+    // MARK: - Persistence
+    func fileURL() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = paths[0]
+        let fileName = "alarmList.json"
+        
+        return documentDirectory.appendingPathComponent(fileName)
+    }
+    
+    func saveToPersistenceStore() {
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(alarms)
+            print(String(data: data, encoding: .utf8)!)
+            try data.write(to: fileURL())
+        } catch {
+            debugPrint("Could not save data: \(error)")
+        }
+    }
+    
+    func loadFromPersistenceStore() -> [Alarm] {
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: fileURL())
+            let alarmArray = try decoder.decode([Alarm].self, from: data)
+            return alarmArray
+        } catch {
+            debugPrint("Could not load data: \(error)")
+        }
+        return []
     }
 }
