@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlarmListTableViewController: UITableViewController, SwitchTableViewCellDelegate {
+class AlarmListTableViewController: UITableViewController, SwitchTableViewCellDelegate, AlarmScheduler {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,12 @@ class AlarmListTableViewController: UITableViewController, SwitchTableViewCellDe
             let indexPath = tableView.indexPath(for: cell) else { return }
         AlarmController.shared.toggleEnabled(for: alarm)
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        
+        if alarm.enabled {
+            scheduleNotifications(for: alarm)
+        } else {
+            cancelUserNotification(for: alarm)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

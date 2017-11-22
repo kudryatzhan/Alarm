@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlarmDetailTableViewController: UITableViewController {
+class AlarmDetailTableViewController: UITableViewController, AlarmScheduler {
 
     // Outlets
     @IBOutlet weak var alarmDatePicker: UIDatePicker!

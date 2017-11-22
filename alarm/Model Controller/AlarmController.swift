@@ -7,6 +7,36 @@
 //
 
 import Foundation
+import UserNotifications
+
+protocol AlarmScheduler {
+    func scheduleNotifications(for alarm: Alarm)
+    func cancelUserNotification(for alarm: Alarm)
+}
+
+extension AlarmScheduler {
+    
+    func scheduleNotifications(for alarm: Alarm) {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "It is time"
+        notificationContent.body = "Here should be a description..."
+        notificationContent.sound = UNNotificationSound.default()
+        
+        let dateComponents = Calendar.current.dateComponents([.minute, .second], from: alarm.fireDate!)
+        let dateTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: alarm.uuid, content: notificationContent, trigger: dateTrigger)
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("Unable to add notification request. \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func cancelUserNotification(for alarm: Alarm) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid])
+    }
+}
 
 class AlarmController {
     
